@@ -83,7 +83,7 @@ async def main():
         )
 
         weather_agent_team = Agent(
-            name="weather_agent_v2", # Give it a new version name
+            name="weather_agent_team", # Give it a new version name
             model="gemini-2.5-flash",
             description="The main coordinator agent. Handles weather requests and delegates greetings/farewells to specialists.",
             instruction="You are the main Weather Agent coordinating a team. Your primary responsibility is to provide weather information. "
