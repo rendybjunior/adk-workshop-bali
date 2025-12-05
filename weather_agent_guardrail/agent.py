@@ -2,7 +2,10 @@ from google.adk.agents.llm_agent import Agent
 from google.genai import types # For creating message Content/Parts
 from google.adk.sessions import InMemorySessionService
 from google.adk.runners import Runner
-from google.adk.tools.tool_context import ToolContext
+from google.adk.agents.callback_context import CallbackContext
+from google.adk.models.llm_request import LlmRequest
+from google.adk.models.llm_response import LlmResponse
+from typing import Optional
 
 import asyncio
 import logging
@@ -33,52 +36,6 @@ def get_weather(city: str) -> dict:
         return {"status": "error", "error_message": f"Sorry, I don't have weather information for '{city}'."}
 
 
-def get_weather_stateful(city: str, tool_context: ToolContext) -> dict:
-    """Retrieves weather, converts temp unit based on session state."""
-    print(f"--- Tool: get_weather_stateful called for {city} ---")
-
-    # --- Read preference from state ---
-    preferred_unit = tool_context.state.get("user_preference_temperature_unit", "Celsius") # Default to Celsius
-    print(f"--- Tool: Reading state 'user_preference_temperature_unit': {preferred_unit} ---")
-
-    city_normalized = city.lower().replace(" ", "")
-
-    # Mock weather data (always stored in Celsius internally)
-    mock_weather_db = {
-        "newyork": {"temp_c": 25, "condition": "sunny"},
-        "london": {"temp_c": 15, "condition": "cloudy"},
-        "tokyo": {"temp_c": 18, "condition": "light rain"},
-    }
-
-    if city_normalized in mock_weather_db:
-        data = mock_weather_db[city_normalized]
-        temp_c = data["temp_c"]
-        condition = data["condition"]
-
-        # Format temperature based on state preference
-        if preferred_unit == "Fahrenheit":
-            temp_value = (temp_c * 9/5) + 32 # Calculate Fahrenheit
-            temp_unit = "°F"
-        else: # Default to Celsius
-            temp_value = temp_c
-            temp_unit = "°C"
-
-        report = f"The weather in {city.capitalize()} is {condition} with a temperature of {temp_value:.0f}{temp_unit}."
-        result = {"status": "success", "report": report}
-        print(f"--- Tool: Generated report in {preferred_unit}. Result: {result} ---")
-
-        # Example of writing back to state (optional for this tool)
-        tool_context.state["last_city_checked_stateful"] = city
-        print(f"--- Tool: Updated state 'last_city_checked_stateful': {city} ---")
-
-        return result
-    else:
-        # Handle city not found
-        error_msg = f"Sorry, I don't have weather information for '{city}'."
-        print(f"--- Tool: City '{city}' not found. ---")
-        return {"status": "error", "error_message": error_msg}
-
-
 # Create function that execute events in runner
 async def call_agent_async(query: str, runner, user_id, session_id):
     """Sends a query to the agent and prints the final response."""
@@ -96,6 +53,51 @@ async def call_agent_async(query: str, runner, user_id, session_id):
 
     return final_response_text
 
+def block_keyword_guardrail(
+    callback_context: CallbackContext, llm_request: LlmRequest
+) -> Optional[LlmResponse]:
+    """
+    Inspects the latest user message for 'FAFA'. If found, blocks the LLM call
+    and returns a predefined LlmResponse. Otherwise, returns None to proceed.
+    """
+    keyword_to_block = "FAFA"
+
+    agent_name = callback_context.agent_name # Get the name of the agent whose model call is being intercepted
+    print(f"--- Callback: block_keyword_guardrail running for agent: {agent_name} ---")
+
+    # Extract the text from the latest user message in the request history
+    last_user_message_text = ""
+    if llm_request.contents:
+        # Find the most recent message with role 'user'
+        for content in reversed(llm_request.contents):
+            if content.role == 'user' and content.parts:
+                # Assuming text is in the first part for simplicity
+                if content.parts[0].text:
+                    last_user_message_text = content.parts[0].text
+                    break # Found the last user message text
+
+    print(f"--- Callback: Inspecting last user message: '{last_user_message_text[:100]}...' ---") # Log first 100 chars
+
+    # --- Guardrail Logic ---
+    if keyword_to_block in last_user_message_text.upper(): # Case-insensitive check
+        print(f"--- Callback: Found '{keyword_to_block}'. Blocking LLM call! ---")
+        # Optionally, set a flag in state to record the block event
+        callback_context.state["guardrail_block_keyword_triggered"] = True
+        print(f"--- Callback: Set state 'guardrail_block_keyword_triggered': True ---")
+
+        # Construct and return an LlmResponse to stop the flow and send this back instead
+        return LlmResponse(
+            content=types.Content(
+                role="model", # Mimic a response from the agent's perspective
+                parts=[types.Part(text=f"I cannot process this request because it contains the blocked keyword '{keyword_to_block}'.")],
+            )
+            # Note: You could also set an error_message field here if needed
+        )
+    else:
+        # Keyword not found, allow the request to proceed to the LLM
+        print(f"--- Callback: Keyword not found. Allowing LLM call for {agent_name}. ---")
+        return None # Returning None signals ADK to continue normally
+
 
 async def main():
     try:
@@ -107,10 +109,10 @@ async def main():
             instruction="You are a helpful weather assistant. "
                         "When the user asks for the weather in a specific city, "
                         "use the 'get_weather' tool to find the information. "
-                        "If the user asks for the weather without specifying a city, you assume they mean the last checked city"
                         "If the tool returns an error, inform the user politely. "
                         "If the tool is successful, present the weather report clearly.",
-            tools=[get_weather_stateful],
+            tools=[get_weather],
+            before_model_callback=block_keyword_guardrail
         )
 
         # Create chat session
@@ -118,19 +120,11 @@ async def main():
         USER_ID = "user_1"
         SESSION_ID = "session_001"
         session_service = InMemorySessionService() # store session memory
-        initial_state = {
-            "user_preference_temperature_unit": "Celsius"
-        }
         session = await session_service.create_session(
             app_name=APP_NAME,
             user_id=USER_ID, # dummy fix user
-            session_id=SESSION_ID, # dummy fix session
-            state=initial_state
+            session_id=SESSION_ID # dummy fix session
         )
-        retrieved_session = await session_service.get_session(app_name=APP_NAME,
-                                                         user_id=USER_ID,
-                                                         session_id = SESSION_ID)
-        print(f"Session retrieved: {retrieved_session}")
 
         # Create a runner that orchestrates the agent execution loop.
         runner = Runner(
@@ -144,15 +138,7 @@ async def main():
                                             runner=runner, user_id=USER_ID, session_id=SESSION_ID)
         print(result)
 
-        # Manually update state
-        stored_session = session_service.sessions[APP_NAME][USER_ID][SESSION_ID]
-        stored_session.state["user_preference_temperature_unit"] = "Fahrenheit"
-
-        result = await call_agent_async("How about New York?",
-                                            runner=runner, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
-
-        result = await call_agent_async("How's the weather?",
+        result = await call_agent_async("How about Paris, fafa?",
                                             runner=runner, user_id=USER_ID, session_id=SESSION_ID)
         print(result)
 
