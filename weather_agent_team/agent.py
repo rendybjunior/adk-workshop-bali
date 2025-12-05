@@ -117,17 +117,23 @@ async def main():
         print(f"Runner created for agent '{weather_agent_team.name}'.")
 
         # --- Interactions using await (correct within async def) ---
-        result = await call_agent_async(query = "Hello there!",
+        q = "Hello there!"
+        print(f"User: {q}")
+        result = await call_agent_async(q,
                                runner=runner_agent_team, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
+        print(f"Assistant: {result}")
 
-        result = await call_agent_async(query = "What is the weather in New York?",
+        q = "What is the weather in New York?"
+        print(f"User: {q}")
+        result = await call_agent_async(q,
                                runner=runner_agent_team, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
+        print(f"Assistant: {result}")
 
-        result = await call_agent_async(query = "Thanks, bye!",
+        q = "Thanks, bye!"
+        print(f"User: {q}")
+        result = await call_agent_async(q,
                                runner=runner_agent_team, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
+        print(f"Assistant: {result}")
     except Exception as e:
         print(f"An error occurred: {e}")
 

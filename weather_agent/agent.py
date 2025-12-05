@@ -84,13 +84,17 @@ async def main():
         )
 
         # Ask to the agent
-        result = await call_agent_async("What is the weather like in London?",
+        q = "What is the weather like in London?"
+        print(f"User: {q}")
+        result = await call_agent_async(q,
                                             runner=runner, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
+        print(f"Assistant: {result}")
 
-        result = await call_agent_async("How about Paris?",
+        q = "How about Paris?"
+        print(f"User: {q}")
+        result = await call_agent_async(q,
                                             runner=runner, user_id=USER_ID, session_id=SESSION_ID)
-        print(result)
+        print(f"Assistant: {result}")
 
     except Exception as e:
         print(f"An error occurred: {e}")
