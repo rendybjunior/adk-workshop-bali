@@ -1,0 +1,86 @@
+[
+  {
+    "id": 1,
+    "influencer": "FoodieJane",
+    "content": "Just tried the new truffle burger at BurgerJoint! 🍔🍄 Absolutely divine. The truffle mayo is a game changer. #foodie #burger #truffle",
+    "likes": 1200,
+    "shares": 300
+  },
+  {
+    "id": 2,
+    "influencer": "FoodieJane",
+    "content": "Sunday brunch goals! 🥑🍞 Avocado toast with poached eggs is my forever favorite. What's yours? #brunch #avocadotoast #sundayvibes",
+    "likes": 1500,
+    "shares": 400
+  },
+  {
+    "id": 3,
+    "influencer": "FoodieJane",
+    "content": "Homemade pasta night! 🍝 Made fresh tagliatelle with a simple tomato basil sauce. Nothing beats fresh pasta. #homemade #pasta #italianfood",
+    "likes": 1800,
+    "shares": 500
+  },
+  {
+    "id": 4,
+    "influencer": "ChefMike",
+    "content": "Secret to a perfect steak? 🥩 Reverse sear! Cook low and slow, then sear high heat. Perfection every time. #steak #cooking #cheftips",
+    "likes": 2500,
+    "shares": 800
+  },
+  {
+    "id": 5,
+    "influencer": "ChefMike",
+    "content": "Exploring the local farmers market today. 🥕🥦 Look at these beautiful heirloom tomatoes! Can't wait to cook with them. #farmersmarket #freshproduce #cooking",
+    "likes": 2000,
+    "shares": 600
+  },
+  {
+    "id": 6,
+    "influencer": "ChefMike",
+    "content": "Quick and easy weeknight dinner: Stir-fry! 🥡 Use whatever veggies you have and a simple soy-ginger sauce. #stirfry #easyrecipes #weeknightdinner",
+    "likes": 2200,
+    "shares": 700
+  },
+  {
+    "id": 7,
+    "influencer": "SweetToothSarah",
+    "content": "Donut worry, be happy! 🍩 Tried the glazed donuts from the new bakery downtown. So fluffy and sweet! #donuts #dessert #sweettooth",
+    "likes": 3000,
+    "shares": 1000
+  },
+  {
+    "id": 8,
+    "influencer": "SweetToothSarah",
+    "content": "Baking chocolate chip cookies today! 🍪 There's nothing like the smell of fresh cookies in the oven. Who wants one? #cookies #baking #chocolate",
+    "likes": 3500,
+    "shares": 1200
+  },
+  {
+    "id": 9,
+    "influencer": "SweetToothSarah",
+    "content": "Ice cream season is here! 🍦 My favorite flavor is mint chocolate chip. What's yours? #icecream #summer #dessert",
+    "likes": 3200,
+    "shares": 1100
+  },
+  {
+    "id": 10,
+    "influencer": "HealthyEatsTom",
+    "content": "Green smoothie to start the day! 🥬🍏 Spinach, apple, banana, and ginger. Packed with nutrients and energy. #smoothie #healthy #breakfast",
+    "likes": 1000,
+    "shares": 200
+  },
+  {
+    "id": 11,
+    "influencer": "HealthyEatsTom",
+    "content": "Meal prep Sunday! 🥗 Quinoa salad with roasted veggies and chickpeas. Ready for a healthy week ahead. #mealprep #healthyfood #vegan",
+    "likes": 1100,
+    "shares": 250
+  },
+  {
+    "id": 12,
+    "influencer": "HealthyEatsTom",
+    "content": "Snack time! 🥜 Apple slices with almond butter. Simple, delicious, and nutritious. #snack #healthysnack #apple",
+    "likes": 900,
+    "shares": 150
+  }
+]
