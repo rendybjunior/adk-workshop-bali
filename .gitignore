@@ -1,0 +1,32 @@
+# Virtual environments
+venv/
+.env/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyd
+*.pyo
+
+# IDE/Editor specific files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs and temporary files
+*.log
+*.tmp
+*.bak
+
+# Build artifacts
+dist/
+build/
+
+# Sensitive data (example)
+config.ini
+secrets.py
+
+# adk
+.adk/
+.env

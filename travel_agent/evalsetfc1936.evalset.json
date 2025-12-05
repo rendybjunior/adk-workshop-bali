@@ -1,0 +1,215 @@
+{
+  "eval_set_id": "evalsetfc1936",
+  "name": "evalsetfc1936",
+  "eval_cases": [
+    {
+      "eval_id": "case56d2fb",
+      "conversation": [
+        {
+          "invocation_id": "e-4b942765-6f50-49ab-93a0-5c30c355ba34",
+          "user_content": {
+            "parts": [
+              {
+                "text": "halo saya mau cari tiket kereta mba"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Tentu, saya bisa bantu. Untuk mencari tiket kereta, saya butuh beberapa informasi:\n\n1.  **Stasiun keberangkatan** Anda darimana?\n2.  **Stasiun tujuan** Anda kemana?\n3.  **Tanggal keberangkatan** (contoh: 2023-11-28)\n4.  **Waktu keberangkatan** (pagi, siang, sore, atau malam)\n5.  **Jumlah penumpang** berapa orang?"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {},
+          "creation_timestamp": 1764894942.851857
+        },
+        {
+          "invocation_id": "e-a764172d-c955-4f23-8d63-0645c8ad21df",
+          "user_content": {
+            "parts": [
+              {
+                "text": "buat 10 desember 2025 dari jakarta ke jogja, pagi aja"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Baik, tanggal 10 Desember 2025, dari Jakarta ke Jogja, pagi hari.\n\nBerapa jumlah penumpang?",
+                "thought_signature": "CtkCAePx_154yxeVlj8S6HmkKy-NcptLJbyfDOe28c1WIBODIGXOxU2lzo3Kq3kFhP-HabBSn6l4-npHCLcVV0C8mnEd3uskz5BV6bHRO9M3m2bayEkkol3gzTaNbAxu2GYhYCnsrrsLSyWbdedrK7ixW3pr_FvS_eU1hY9MnI7m-OhTKJYPTr8E52bVsj8yoUpwvM7AK9ASsdGE3IAAVg-cM0hn0zoWrUC4WFRTHaaoT9Gz0wIVnjFJEebSpO8hOzXobeOvrriZUY-18OIdpcYpLbcDOfjE2eKVHTmhsSgx2vaynskGwvNXdmdDmzWJxHhNmJaztIDGUniZUzDqGpflmB7dCTEAggVaJBkIDpI0d20EXQc5XVW8TkmY6V60CIM2wlI2tRZaENEH8qY9cwWdiVCpKVefzseQPYb_TZJ9h3DkRJmXxJBUO6oX93h8aNz_pmSb3N3AIxgv"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {},
+          "creation_timestamp": 1764894971.693953
+        },
+        {
+          "invocation_id": "e-28a3db77-3e2b-4076-b005-f6706916f705",
+          "user_content": {
+            "parts": [
+              {
+                "text": "saya sendirian"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Baik, ada kereta Argo Semeru 6 berangkat pukul 06:20 dengan harga Rp 585.000. Apakah Anda ingin memesan tiket ini?"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Oke, satu penumpang. Saya akan cari tiket kereta untuk tanggal 10 Desember 2025, dari Jakarta ke Jogja, pagi hari, untuk 1 orang.\n\n",
+                      "thought_signature": "Co8CAePx_16M3vAN7Tl-WnTkv1kh9BVUXd38OfzqR5xDGFY0_Kd7bkfbhfxOS1KNGnTsTcNXg-uON8pJkPnKUNWzD6KTGPRUMGQbTMhq1S45n30K3eiRHgBBWqrKJkrW_2dy7t4XpJIZo9V-PkzBQDr3TrrJEcTW-4NeVq22Y8sLtu_hnMa7MgMoUV94WGtPBLSCZISXS-rab0XdoPIKCopC5C2ZU4jc1oILTZD9no4YmmdG3VEqoDtiW7RDoTyhGq-Lt9pj_HFc-At9O0Ibz1tGmr3xcNfpRLNtZD9m2MUi_DxWyNOsoe1tTfUCatrdFZ0mmurhX4fPjctl6du3QFKUJLHck-fGXa6Tw3olYGwDUQ=="
+                    },
+                    {
+                      "function_call": {
+                        "id": "adk-62ef1981-90e1-4e20-a147-4d316bc6962a",
+                        "args": {
+                          "date": "2025-12-10",
+                          "origin": "Jakarta",
+                          "dest": "Jogja",
+                          "day_part": "pagi",
+                          "pax": 1
+                        },
+                        "name": "search_train"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-62ef1981-90e1-4e20-a147-4d316bc6962a",
+                        "name": "search_train",
+                        "response": {
+                          "code": "Argo Semeru 6",
+                          "departure": "6:20",
+                          "price": 585000
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1764894976.544902
+        },
+        {
+          "invocation_id": "e-3fdc9751-e91e-4185-af79-d4430a840e6c",
+          "user_content": {
+            "parts": [
+              {
+                "text": "gas mba"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Baik, untuk proses pemesanan, mohon informasikan nama lengkap Anda.",
+                "thought_signature": "CpQCAePx_172sewc9RL7S0PZjJfZaDzt7U5sz9xH4pLBBUJNjqLPHSMbR_6w8YxE0dqE18f6anx4HHDwIQKHIRMaObcPvl7dX5XxDQIGkvXIgiApN86hOY-mdT4ahJ3mBNLwQAckKL6zIFtgn02MHmxn2JfT1SSDXLVWXBcc-EQncFXoqWcaqaT2aXrCQUFiayb324yWI0tqLvinrX1dFpwILDToLXLYm9q-mI0mCh6Mu2Mei4qpm0lLVXhpglZRWRZEOyiSyyjG3FVf5f98uWWmhE_87zkNJoiFahVEVfq9t0gzPkSLYVliKt7cYnfS1aKrEwDmwHiTGrmj3eZUNiZyjvy0t8PqwccS1vscf6ZobTlnWCe-"
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {},
+          "creation_timestamp": 1764894986.261912
+        },
+        {
+          "invocation_id": "e-33d6a46a-cbdf-4e36-bbd3-1a711a4caaca",
+          "user_content": {
+            "parts": [
+              {
+                "text": "Zulkifli Hasan"
+              }
+            ],
+            "role": "user"
+          },
+          "final_response": {
+            "parts": [
+              {
+                "text": "Baik, tiket kereta Anda sudah berhasil dipesan atas nama Zulkifli Hasan. Silakan lakukan pembayaran melalui pranala berikut: http://sample.bayar.id."
+              }
+            ],
+            "role": "model"
+          },
+          "intermediate_data": {
+            "invocation_events": [
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "text": "Siap, Zulkifli Hasan. Saya akan proses pemesanan tiket kereta Argo Semeru 6 untuk Anda.\n\n",
+                      "thought_signature": "CqMCAePx_15pX3371AiKQ3E3jFCuXjcqs4kIponfdXSYe8I0dTrSgi86gO0tJ3t6rv8EHXpWY6iNEEnQQdw37MC-U34UdQwkauDCpm0HCLrUk2IjIKD9q0zxY6H8LMDxV_o6_YAc7X-8oKj25oGDtcZayTtzkz7rCjlHsLuFfLdZVMLgR25Fuwak34f9QI813OKE3M1hm13qHBb7UdFNFWowQoHr2zRkZbT4fJLtNQv6ew2w12qOcf1yVdXfNplyYHSMO5tabwleKEl7NXacMREtA-TDSUJf1Rs1UfI-YqQWXtgDlqeN1niYKcICghfppn2kE38hJq3fX5YNw0h3KGTggE7cVCVK58CFlbVxta8f50IcX-0qU84PLiPuroyAi8xmjMDS"
+                    },
+                    {
+                      "function_call": {
+                        "id": "adk-a13634a2-0f56-4894-b357-c5e62dbc78b6",
+                        "args": {
+                          "name": "Zulkifli Hasan",
+                          "code": "Argo Semeru 6"
+                        },
+                        "name": "book_train"
+                      }
+                    }
+                  ],
+                  "role": "model"
+                }
+              },
+              {
+                "author": "root_agent",
+                "content": {
+                  "parts": [
+                    {
+                      "function_response": {
+                        "id": "adk-a13634a2-0f56-4894-b357-c5e62dbc78b6",
+                        "name": "book_train",
+                        "response": {
+                          "status": "booked",
+                          "name": "Zulkifli Hasan",
+                          "payment_link": "http://sample.bayar.id"
+                        }
+                      }
+                    }
+                  ],
+                  "role": "user"
+                }
+              }
+            ]
+          },
+          "creation_timestamp": 1764894998.546961
+        }
+      ],
+      "session_input": {
+        "app_name": "travel_agent",
+        "user_id": "user"
+      },
+      "creation_timestamp": 1764895242.5584042
+    }
+  ],
+  "creation_timestamp": 1764895229.076635
+}
