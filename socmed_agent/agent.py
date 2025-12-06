@@ -68,7 +68,7 @@ publisher_agent = Agent(
 root_agent = SequentialAgent(
     name="socmed_root_agent",
     description="Sequential agent for social media workflow.",
-    sub_agents=[summarization_agent, creation_agent, publisher_agent]
+    # TODO sub_agents=[...]
 )
 
 # --- Execution Helper ---

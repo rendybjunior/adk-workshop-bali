@@ -64,9 +64,9 @@ async def main():
 
         # Create runner
         runner = Runner(
-            agent=root_agent,
+            agent=None, # TODO
             app_name=APP_NAME,
-            session_service=session_service
+            session_service=None # TODO
         )
 
         # Ask to the agent

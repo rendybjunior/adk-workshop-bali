@@ -13,5 +13,5 @@ root_agent = Agent(
     name='root_agent',
     description="Travel agent",
     instruction="You are a helpful travel agent for search and booking train.",
-    tools=[search_train, book_train],
+    # TODO tools=[...],
 )

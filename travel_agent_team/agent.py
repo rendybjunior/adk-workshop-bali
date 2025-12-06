@@ -33,7 +33,7 @@ train_agent = Agent(
     model="gemini-2.5-flash",
     description="Specialist for searching and booking trains.",
     instruction="You are a train travel specialist. Use 'search_train' to find schedules and 'book_train' to make bookings.",
-    tools=[search_train, book_train],
+    # TODO tools=[...],
 )
 
 hotel_agent = Agent(
@@ -41,7 +41,7 @@ hotel_agent = Agent(
     model="gemini-2.5-flash",
     description="Specialist for searching and booking hotels.",
     instruction="You are a hotel booking specialist. Use 'search_hotel' to find accommodation and 'book_hotel' to make reservations.",
-    tools=[search_hotel, book_hotel],
+    # TODO tools=[...],
 )
 
 # Create root agent
@@ -55,5 +55,5 @@ root_agent = Agent(
                 "2. 'hotel_agent': Handles hotel searches and bookings. "
                 "Delegate user requests to the appropriate specialist. "
                 "If the user asks for both, you can coordinate between them.",
-    sub_agents=[train_agent, hotel_agent]
+    # TODO sub_agents=[...]
 )

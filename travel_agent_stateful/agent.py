@@ -78,16 +78,14 @@ async def main():
         SESSION_ID = "session_001"
         session_service = InMemorySessionService()
         
-        # Initialize state with Jakarta as the last traveled city
-        initial_state = {
-            "last_traveled_city": "Jakarta"
-        }
+        # Initialize state with Jakarta as the last_traveled_city
+        # initial_state = {"...": "..."}
         
         session = await session_service.create_session(
             app_name=APP_NAME,
             user_id=USER_ID,
             session_id=SESSION_ID,
-            state=initial_state
+            # TODO state=...
         )
 
         # Create runner
