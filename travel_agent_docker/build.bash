@@ -1,0 +1,1 @@
+docker build --build-arg GOOGLE_API_KEY=$GOOGLE_API_KEY -t travel-agent:latest .
